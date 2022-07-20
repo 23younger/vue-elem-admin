@@ -14,11 +14,15 @@ import { visualizer } from 'rollup-plugin-visualizer'
 // ? 生成html配置
 import { configHtmlPlugin } from './html'
 
+// ? 原子化css，处理css样式
+import { unocss } from './unocss'
+
 export function createVitePlugins(viteEnv, isBuild) {
     const plugins = [
         vue(),
         VueSetupExtend(),
-        configHtmlPlugin(viteEnv, isBuild)
+        unocss(), // ! 放在configHtmlPlugin后面会报错
+        configHtmlPlugin(viteEnv, isBuild),
     ]
 
     if (isBuild) {
