@@ -35,16 +35,19 @@ export function wrapperEnv(envOptions) {
 // * 处理代理
 const httpsReg = /^https:\/\//;
 export function createProxy(list = []) {
+  console.log(list);
   const res = {};
   for (const [prefix, target] of list) {
+    console.log(prefix, target);
     const isHttps = httpsReg.test(target);
     res[prefix] = {
       target: target,
       changeOrigin: true,
       ws: true,
       secure: isHttps,
-      rewrite: (path) => path.replace(new RegExp(`^${prefix}`), ""),
+      // rewrite: (path) => path.replace(new RegExp(`^${prefix}`), ""),
     };
   }
+  console.log(res);
   return res;
 }
