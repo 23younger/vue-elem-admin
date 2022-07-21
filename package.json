@@ -11,6 +11,7 @@
     "lint:fix": "eslint --fix --ext .js,.vue ."
   },
   "dependencies": {
+    "element-plus": "^2.2.9",
     "vue": "^3.2.37"
   },
   "devDependencies": {
@@ -26,6 +27,8 @@
     "prettier": "^2.7.1",
     "rollup-plugin-visualizer": "^5.7.1",
     "unocss": "^0.44.5",
+    "unplugin-auto-import": "^0.9.3",
+    "unplugin-vue-components": "^0.21.1",
     "vite": "^3.0.0",
     "vite-plugin-html": "^3.2.0",
     "vite-plugin-vue-setup-extend": "^0.4.0"
