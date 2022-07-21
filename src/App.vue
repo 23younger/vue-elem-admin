@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted } from "vue";
 onMounted(() => {
   console.log("onMount");
+  ElMessage.success("mount");
 });
 
 onUnmounted(() => {
@@ -11,6 +12,7 @@ onUnmounted(() => {
 
 <template>
   <div p-24>
+    <el-button>点击一下</el-button>
     <p>
       文档：
       <a hover-decoration-underline c-blue href="https://uno.antfu.me/" target="_blank">https://uno.antfu.me/ </a>
