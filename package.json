@@ -11,9 +11,12 @@
     "lint:fix": "eslint --fix --ext .js,.vue ."
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.6",
     "axios": "^0.27.2",
     "element-plus": "^2.2.9",
-    "vue": "^3.2.37"
+    "nprogress": "^0.2.0",
+    "vue": "^3.2.37",
+    "vue-router": "^4.1.2"
   },
   "devDependencies": {
     "@unocss/preset-attributify": "^0.44.5",
