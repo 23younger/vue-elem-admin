@@ -1,12 +1,8 @@
 <script setup>
 import { onMounted, onUnmounted } from "vue";
-import { getUser } from "@/apis/user";
 onMounted(() => {
   console.log("onMount");
   ElMessage.success("mount");
-
-  console.log("sdsdsds");
-  getUser();
 });
 
 onUnmounted(() => {

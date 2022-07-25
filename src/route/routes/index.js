@@ -34,4 +34,13 @@ export const routes = [
       title: "Login",
     },
   },
+  {
+    name: "404",
+    path: "/404",
+    component: () => import("@/views/error-pages/404.vue"),
+    isHidden: true,
+    meta: {
+      title: "404",
+    },
+  },
 ];

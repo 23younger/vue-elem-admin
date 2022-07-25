@@ -1,22 +1,27 @@
 <template>
-  <div class="common-layout">
-    <el-container>
-      <el-aside>
-        <Asider />
-      </el-aside>
-      <el-container>
-        <el-header>header</el-header>
-        <el-main>
-          <router-view></router-view>
-        </el-main>
-      </el-container>
-    </el-container>
-  </div>
+  <n-layout has-sider h-full>
+    <n-layout-sider
+      bordered
+      show-trigger
+      collapse-mode="width"
+      :collapse-width="64"
+      :width="220"
+      :native-scrollbar="false"
+      :collapsed="appStore.collapsed"
+      @update:collapsed="appStore.switchCollapsed()"
+      @update:expand="appStore.switchCollapsed()"
+    >
+      <SideBar />
+    </n-layout-sider>
+  </n-layout>
 </template>
 
 <script setup>
 import {} from "vue";
-import Asider from "./components/aside/index.vue";
+import SideBar from "./components/sideBar/index.vue";
+import { useAppStore } from "@/store/modules/app";
+
+const appStore = useAppStore();
 </script>
 
 <style scoped lang="less"></style>

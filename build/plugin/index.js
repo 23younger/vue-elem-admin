@@ -15,25 +15,21 @@ import { visualizer } from "rollup-plugin-visualizer";
 import { configHtmlPlugin } from "./html";
 
 // ? 原子化css，处理css样式
-import { unocss } from "./unocss";
+import Unocss from "unocss/vite";
 
-// ? elementUI组件自动导入
-import AutoImport from "unplugin-auto-import/vite";
+// ? NaiveUI组件自动导入
 import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
 
 export function createVitePlugins(viteEnv, isBuild) {
   const plugins = [
     vue(),
     VueSetupExtend(),
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-    }),
     Components({
-      resolvers: [ElementPlusResolver()],
+      resolvers: [NaiveUiResolver()],
     }),
-    unocss(), // ! 放在configHtmlPlugin后面会报错
     configHtmlPlugin(viteEnv, isBuild),
+    Unocss(),
   ];
 
   if (isBuild) {
