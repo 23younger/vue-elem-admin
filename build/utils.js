@@ -2,6 +2,8 @@
  * ! vite执行时相关方法配置
  */
 
+import path from "path";
+
 // * node环境下统一处理env环境变量
 export function wrapperEnv(envOptions) {
   if (!envOptions) return {};
@@ -47,4 +49,8 @@ export function createProxy(list = []) {
     };
   }
   return res;
+}
+
+export function getRootPath(...dir) {
+  return path.resolve(process.cwd(), ...dir);
 }

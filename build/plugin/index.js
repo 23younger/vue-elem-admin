@@ -17,20 +17,10 @@ import { configHtmlPlugin } from "./html";
 // ? 原子化css，处理css样式
 import Unocss from "unocss/vite";
 
-// ? NaiveUI组件自动导入
-import Components from "unplugin-vue-components/vite";
-import { NaiveUiResolver } from "unplugin-vue-components/resolvers";
+import unplugin from "./unplugin";
 
 export function createVitePlugins(viteEnv, isBuild) {
-  const plugins = [
-    vue(),
-    VueSetupExtend(),
-    Components({
-      resolvers: [NaiveUiResolver()],
-    }),
-    configHtmlPlugin(viteEnv, isBuild),
-    Unocss(),
-  ];
+  const plugins = [vue(), VueSetupExtend(), ...unplugin, configHtmlPlugin(viteEnv, isBuild), Unocss()];
 
   if (isBuild) {
     plugins.push(

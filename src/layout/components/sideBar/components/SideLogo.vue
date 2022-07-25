@@ -1,6 +1,7 @@
 <template>
   <router-link to="/" f-c-c h-60>
-    <h2 v-show="!appStore.collapsed" text-16 color-primary max-w-140 font-bold>
+    <icon-custom-logo text-36></icon-custom-logo>
+    <h2 v-show="!appStore.collapsed" ml-10 text-16 color-primary max-w-140 font-bold>
       {{ title }}
     </h2>
   </router-link>
