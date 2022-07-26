@@ -8,11 +8,15 @@
       :width="220"
       :native-scrollbar="false"
       :collapsed="appStore.collapsed"
-      @update:collapsed="appStore.switchCollapsed()"
-      @update:expand="appStore.switchCollapsed()"
+      @collapse="appStore.switchCollapsed()"
+      @expand="appStore.switchCollapsed()"
     >
       <SideBar />
     </n-layout-sider>
+    <n-layout>
+      <n-layout-header bg-white border-b bc-eee h-60> </n-layout-header>
+      <n-layout h-200 bgc-ededed></n-layout>
+    </n-layout>
   </n-layout>
 </template>
 

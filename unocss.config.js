@@ -7,4 +7,8 @@ export default defineConfig({
     ["wh-full", "w-full h-full"],
     ["f-c-c", "flex justify-center items-center"],
   ],
+  rules: [
+    [/^bc-(.+)$/, ([, color]) => ({ "border-color": `#${color}` })],
+    [/^bgc-(.+)$/, ([, color]) => ({ "background-color": `#${color}` })],
+  ],
 });

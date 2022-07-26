@@ -1,87 +1,52 @@
 <template>
-  <n-menu accordion :indent="18" :collapsed-icon-size="22" :collapsed-width="64" :options="menuOptions"> </n-menu>
+  <n-menu
+    accordion
+    :indent="18"
+    :collapsed-icon-size="22"
+    :collapsed-width="64"
+    :options="menuOptions"
+    @update:value="changeMenuVal"
+  ></n-menu>
 </template>
 
 <script setup>
-import { h } from "vue";
-import { NIcon } from "naive-ui";
-const renderIcon = (icon) => {
-  return h(NIcon, null, { default: () => h(icon) });
+import renderIcon from "@/utils/icon";
+import { useUserStore } from "@/store/modules/user";
+import { routes } from "@/route/routes";
+import { isExternal } from "@/utils/is";
+const userStore = useUserStore();
+const router = useRouter();
+const { userAccessMenu: menus } = userStore;
+console.log("menus", menus, routes);
+const resolvePath = (basePath, path) => {
+  if (isExternal(path)) return path;
+  return basePath + path;
 };
-const menuOptions = [
-  {
-    label: "且听风吟",
-    key: "hear-the-wind-sing",
-    // icon: renderIcon(BookIcon),
-  },
-  {
-    label: "1973年的弹珠玩具",
-    key: "pinball-1973",
-    // icon: renderIcon(BookIcon),
-    disabled: true,
-    children: [
-      {
-        label: "鼠",
-        key: "rat",
-      },
-    ],
-  },
-  {
-    label: "寻羊冒险记",
-    key: "a-wild-sheep-chase",
-    disabled: true,
-    // icon: renderIcon(BookIcon),
-  },
-  {
-    label: "舞，舞，舞",
-    key: "dance-dance-dance",
-    // icon: renderIcon(BookIcon),
-    children: [
-      {
-        type: "group",
-        label: "人物",
-        key: "people",
-        children: [
-          {
-            label: "叙事者",
-            key: "narrator",
-            // icon: renderIcon(PersonIcon),
-          },
-          {
-            label: "羊男",
-            key: "sheep-man",
-            // icon: renderIcon(PersonIcon),
-          },
-        ],
-      },
-      {
-        label: "饮品",
-        key: "beverage",
-        // icon: renderIcon(WineIcon),
-        children: [
-          {
-            label: "威士忌",
-            key: "whisky",
-          },
-        ],
-      },
-      {
-        label: "食物",
-        key: "food",
-        children: [
-          {
-            label: "三明治",
-            key: "sandwich",
-          },
-        ],
-      },
-      {
-        label: "过去增多，未来减少",
-        key: "the-past-increases-the-future-recedes",
-      },
-    ],
-  },
-];
+const getMenuItem = function (route, basePath = "") {
+  let menuItem = {
+    label: (route.meta && route.meta.title) || route.name,
+    key: route.name,
+    path: resolvePath(basePath, route.path),
+    icon: route.meta?.icon ? renderIcon(route.meta.icon, { size: 16 }) : renderIcon("mdi:circle-outline", { size: 8 }),
+  };
+  if (route.children && route.children.length) {
+    basePath = menuItem.path;
+    menuItem.children = route.children.map((v) => {
+      return getMenuItem(v, basePath);
+    });
+  }
+  return menuItem;
+};
+const menuOptions = routes
+  .filter((v) => !v.isHidden)
+  .map(($v) => {
+    return getMenuItem($v);
+  });
+
+const changeMenuVal = (val, item) => {
+  console.log(val, item);
+  router.push({ path: item.path });
+};
 </script>
 
 <style scoped lang="less"></style>

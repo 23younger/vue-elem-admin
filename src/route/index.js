@@ -8,7 +8,7 @@ export const router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 }),
 });
 
-export function setupRputer(app) {
+export function setupRouter(app) {
   createGuard(router);
   app.use(router);
 }

@@ -1,10 +1,11 @@
 import { defineStore } from "pinia";
-import { getUser } from "@/apis/user";
+import { fetchUserInfo, fetchUserAccess } from "@/apis/user";
 
 export const useUserStore = defineStore("user", {
   state() {
     return {
       userInfo: {},
+      userAccessMenu: [],
     };
   },
   getters: {
@@ -15,8 +16,17 @@ export const useUserStore = defineStore("user", {
   actions: {
     async getUserInfo() {
       try {
-        const { data, code, message } = await getUser();
+        const { data, code, message } = await fetchUserInfo();
         this.userInfo = data;
+        return Promise.resolve();
+      } catch (error) {
+        return Promise.reject();
+      }
+    },
+    async getUserAccess() {
+      try {
+        const { data, code, message } = await fetchUserAccess();
+        this.userAccessMenu = data;
         return Promise.resolve();
       } catch (error) {
         return Promise.reject();

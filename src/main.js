@@ -2,10 +2,10 @@ import { createApp } from "vue";
 import "./styles/index.less";
 import "uno.css";
 import App from "./App.vue";
-import { setupRputer } from "./route";
+import { setupRouter } from "./route";
 import { setupStore } from "./store";
 
 const app = createApp(App);
 setupStore(app);
-setupRputer(app);
+setupRouter(app);
 app.mount("#app");
