@@ -5,6 +5,7 @@
     :collapsed-icon-size="22"
     :collapsed-width="64"
     :options="menuOptions"
+    :value="currentRoute.name"
     @update:value="changeMenuVal"
   ></n-menu>
 </template>
@@ -12,16 +13,19 @@
 <script setup>
 import renderIcon from "@/utils/icon";
 import { useUserStore } from "@/store/modules/user";
-import { routes } from "@/route/routes";
+import { routes } from "@/router/routes";
 import { isExternal } from "@/utils/is";
+
 const userStore = useUserStore();
 const router = useRouter();
+const { currentRoute } = router;
 const { userAccessMenu: menus } = userStore;
-console.log("menus", menus, routes);
+console.log("menus", menus, routes, currentRoute);
 const resolvePath = (basePath, path) => {
   if (isExternal(path)) return path;
   return basePath + path;
 };
+
 const getMenuItem = function (route, basePath = "") {
   let menuItem = {
     label: (route.meta && route.meta.title) || route.name,
@@ -37,6 +41,7 @@ const getMenuItem = function (route, basePath = "") {
   }
   return menuItem;
 };
+
 const menuOptions = routes
   .filter((v) => !v.isHidden)
   .map(($v) => {

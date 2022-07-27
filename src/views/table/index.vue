@@ -1,4 +1,6 @@
-<template>表格</template>
+<template>
+  <div>table</div>
+</template>
 
 <script setup>
 import {} from "vue";

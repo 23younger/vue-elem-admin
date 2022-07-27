@@ -42,7 +42,7 @@ class Storage {
   }
 
   remove(key) {
-    this.storage.remove(this.getKey(key));
+    this.storage.removeItem(this.getKey(key));
   }
 
   clear() {
