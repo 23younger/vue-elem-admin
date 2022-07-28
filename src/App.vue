@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-import AppProvider from "@/components/common/AppProvider.vue";
+import AppProvider from "@/components/AppProvider/index.vue";
 import { useUserStore } from "./store/modules/user";
 const userStore = useUserStore();
 userStore.getUserInfo();

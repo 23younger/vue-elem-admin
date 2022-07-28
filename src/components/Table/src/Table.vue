@@ -1,8 +1,9 @@
-<template></template>
+<template>
+  <div></div>
+</template>
 
 <script setup>
 import {} from "vue";
-import CueTable from "@/components/Table/index.vue";
 </script>
 
 <style scoped lang="less"></style>

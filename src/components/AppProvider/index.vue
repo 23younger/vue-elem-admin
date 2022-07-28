@@ -13,7 +13,7 @@
   </n-config-provider>
 </template>
 
-<script setup name="appProvider">
+<script setup name="AppProvider">
 import { useLoadingBar, useDialog, useMessage, useNotification } from "naive-ui";
 import { defineComponent, h } from "vue";
 const themeOverrides = {
