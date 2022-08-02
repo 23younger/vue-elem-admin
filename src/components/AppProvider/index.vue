@@ -18,10 +18,10 @@ import { useLoadingBar, useDialog, useMessage, useNotification } from "naive-ui"
 import { defineComponent, h } from "vue";
 const themeOverrides = {
   common: {
-    primaryColor: "#316C72FF",
-    primaryColorHover: "#316C72E3",
-    primaryColorPressed: "#2B4C59FF",
-    primaryColorSuppl: "#316C7263",
+    primaryColor: "#2d8cf0",
+    primaryColorHover: "#2d8cf0",
+    primaryColorPressed: "#2d8cf0",
+    primaryColorSuppl: "#2d8cf0",
   },
 };
 
