@@ -33,7 +33,7 @@
 </template>
 
 <script setup name="BasicTable">
-import { ref, defineProps, emit } from "vue";
+import { ref, defineProps, defineEmits, computed } from "vue";
 import { createContextTable } from "./hooks/useTableContext";
 import { useLoading } from "./hooks/useLoading";
 import { useColumns } from "./hooks/useColumns";
@@ -46,7 +46,30 @@ const props = defineProps({
   ...basicProps,
 });
 
+const emits = defineEmits(["fetch-success"]);
+
 const tableElRef = ref(null);
+const tableData = ref([]);
+const getProps = computed(() => {
+  return { ...props };
+});
+
+const { getLoading, setLoading } = useLoading(getProps);
+
+const { getPaginationInfo, setPagination } = usePagination(getProps);
+
+const { getDataSourceRef, getDataSource, getRowKey, reload } = useDataSource(
+  getProps,
+  {
+    getPaginationInfo,
+    setPagination,
+    tableData,
+    setLoading,
+  },
+  emits
+);
+
+const { getPageColumns, getColumns, setColumns } = useColumns(getProps);
 </script>
 
 <style scoped lang="less"></style>

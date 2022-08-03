@@ -6,4 +6,8 @@ export const basicProps = {
     type: String,
     default: "",
   },
+  request: {
+    type: Function,
+    default: () => {},
+  },
 };

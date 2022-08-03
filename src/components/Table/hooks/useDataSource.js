@@ -39,7 +39,7 @@ export function useDataSource(propsRef, { getPaginationInfo, setPagination, setL
     dataSourceRef.value = value;
   };
 
-  const getTableData = () => {
+  const getDataSource = () => {
     return getDataSourceRef.value;
   };
 
@@ -52,7 +52,7 @@ export function useDataSource(propsRef, { getPaginationInfo, setPagination, setL
     getDataSourceRef,
     fetch,
     setTableData,
-    getTableData,
+    getDataSource,
     reload,
   };
 }
