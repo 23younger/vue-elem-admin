@@ -27,13 +27,26 @@
       </n-tooltip>
     </div>
   </div>
-  <div class="table-content"></div>
+  <div class="table-content">
+    <n-data-table :ref="tableElRef" :striped="true"> </n-data-table>
+  </div>
 </template>
 
 <script setup name="BasicTable">
-import {} from "vue";
+import { ref, defineProps, emit } from "vue";
 import { createContextTable } from "./hooks/useTableContext";
 import { useLoading } from "./hooks/useLoading";
+import { useColumns } from "./hooks/useColumns";
+import { useDataSource } from "./hooks/useDataSource";
+import { usePagination } from "./hooks/usePagination";
+
+import { basicProps } from "./props";
+
+const props = defineProps({
+  ...basicProps,
+});
+
+const tableElRef = ref(null);
 </script>
 
 <style scoped lang="less"></style>
