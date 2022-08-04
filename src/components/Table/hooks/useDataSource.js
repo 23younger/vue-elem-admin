@@ -1,3 +1,4 @@
+import { onMounted } from "vue";
 import { unref, watchEffect, ref, watch, computed } from "vue";
 
 export function useDataSource(propsRef, { getPaginationInfo, setPagination, setLoading, tableData }, emit) {
@@ -29,7 +30,11 @@ export function useDataSource(propsRef, { getPaginationInfo, setPagination, setL
 
   const fetch = async (opt) => {
     try {
+      console.log("fetch....");
       setLoading(true);
+      const { request } = propsRef;
+      const data = await request();
+      console.log("data", data);
     } catch (error) {
       setLoading(false);
     }
@@ -46,6 +51,10 @@ export function useDataSource(propsRef, { getPaginationInfo, setPagination, setL
   const reload = async (opt) => {
     await fetch(opt);
   };
+
+  onMounted(() => {
+    fetch();
+  });
 
   return {
     getRowKey,

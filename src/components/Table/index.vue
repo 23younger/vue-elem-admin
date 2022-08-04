@@ -28,12 +28,19 @@
     </div>
   </div>
   <div class="table-content">
-    <n-data-table :ref="tableElRef" :striped="true"> </n-data-table>
+    <n-data-table
+      v-bind="getBindValues"
+      :ref="tableElRef"
+      :striped="true"
+      @update:page="updatePage"
+      @update:page-size="updatePageSize"
+    >
+    </n-data-table>
   </div>
 </template>
 
 <script setup name="BasicTable">
-import { ref, defineProps, defineEmits, computed } from "vue";
+import { ref, defineProps, defineEmits, computed, reactive, unref, toRaw } from "vue";
 import { createContextTable } from "./hooks/useTableContext";
 import { useLoading } from "./hooks/useLoading";
 import { useColumns } from "./hooks/useColumns";
@@ -45,6 +52,8 @@ import { basicProps } from "./props";
 const props = defineProps({
   ...basicProps,
 });
+
+console.log("props", props);
 
 const emits = defineEmits(["fetch-success"]);
 
@@ -70,6 +79,31 @@ const { getDataSourceRef, getDataSource, getRowKey, reload } = useDataSource(
 );
 
 const { getPageColumns, getColumns, setColumns } = useColumns(getProps);
+
+// 页码切换
+const updatePage = (page) => {
+  setPagination({ page: page });
+  reload();
+};
+
+// 分页数量切换
+const updatePageSize = (size) => {
+  setPagination({ page: 1, pageSize: size });
+  reload();
+};
+
+// 组装表格信息
+const getBindValues = computed(() => {
+  const { tableData } = unref(getDataSourceRef);
+  return {
+    ...unref(getProps),
+    column: toRaw(unref(getPageColumns)),
+    loading: unref(getLoading),
+    rowKey: unref(getRowKey),
+    data: tableData,
+    remote: true,
+  };
+});
 </script>
 
 <style scoped lang="less"></style>

@@ -1,4 +1,4 @@
-import { h, ref, unref, watch } from "vue";
+import { h, ref, unref, watch, computed } from "vue";
 import { cloneDeep, isEqual } from "lodash-es";
 import { isArray, isString } from "@/utils/is";
 import { NTooltip } from "naive-ui";
@@ -39,7 +39,7 @@ export function useColumns(propsRef) {
     });
   };
 
-  const getPageColumns = () => {
+  const getPageColumns = computed(() => {
     const pageColumns = unref(getColumnsRef);
     const columns = cloneDeep(pageColumns);
     return columns
@@ -60,7 +60,7 @@ export function useColumns(propsRef) {
           };
         }
       });
-  };
+  });
 
   const setColumns = (columnList) => {
     const columns = cloneDeep(columnList);
